@@ -1,0 +1,620 @@
+
+> test
+> node --test cloud/*.test.mjs
+
+TAP version 13
+# Subtest: confirmation must match exactly
+ok 1 - confirmation must match exactly
+  ---
+  duration_ms: 1.017713
+  type: 'test'
+  ...
+# Subtest: only POST allowed
+ok 2 - only POST allowed
+  ---
+  duration_ms: 0.201373
+  type: 'test'
+  ...
+# Subtest: storage paths stay inside account namespace
+ok 3 - storage paths stay inside account namespace
+  ---
+  duration_ms: 0.188424
+  type: 'test'
+  ...
+# Subtest: storage failure prevents account removal
+ok 4 - storage failure prevents account removal
+  ---
+  duration_ms: 0.792043
+  type: 'test'
+  ...
+# Subtest: path ownership rejects empty IDs, empty components and traversal
+ok 5 - path ownership rejects empty IDs, empty components and traversal
+  ---
+  duration_ms: 0.160963
+  type: 'test'
+  ...
+# Subtest: offline proof deletion creates a durable tombstone in the correct store
+ok 6 - offline proof deletion creates a durable tombstone in the correct store
+  ---
+  duration_ms: 5.721782
+  type: 'test'
+  ...
+# Subtest: reconnecting flushes proof deletion and removes tombstone only after cloud success
+ok 7 - reconnecting flushes proof deletion and removes tombstone only after cloud success
+  ---
+  duration_ms: 3.423569
+  type: 'test'
+  ...
+# Subtest: cloud deletion error retains tombstone for retry
+ok 8 - cloud deletion error retains tombstone for retry
+  ---
+  duration_ms: 1.457336
+  type: 'test'
+  ...
+# Subtest: badge detail includes an initially hidden proof container
+ok 9 - badge detail includes an initially hidden proof container
+  ---
+  duration_ms: 0.905755
+  type: 'test'
+  ...
+# Subtest: badge reveal button starts collapsed
+ok 10 - badge reveal button starts collapsed
+  ---
+  duration_ms: 0.215365
+  type: 'test'
+  ...
+# Subtest: opening a badge resets proof state instead of inserting its image
+ok 11 - opening a badge resets proof state instead of inserting its image
+  ---
+  duration_ms: 0.167432
+  type: 'test'
+  ...
+# Subtest: proof image is only created by reveal click
+ok 12 - proof image is only created by reveal click
+  ---
+  duration_ms: 0.203246
+  type: 'test'
+  ...
+# Subtest: closing the dialog removes the old proof image and reference
+ok 13 - closing the dialog removes the old proof image and reference
+  ---
+  duration_ms: 0.231929
+  type: 'test'
+  ...
+# Subtest: badges without a proof disable the reveal control
+ok 14 - badges without a proof disable the reveal control
+  ---
+  duration_ms: 0.163386
+  type: 'test'
+  ...
+# Subtest: offline completion gives immediate XP and remains pending
+ok 15 - offline completion gives immediate XP and remains pending
+  ---
+  duration_ms: 2.142268
+  type: 'test'
+  ...
+# Subtest: duplicate tap and network retry never grant double XP
+ok 16 - duplicate tap and network retry never grant double XP
+  ---
+  duration_ms: 0.203166
+  type: 'test'
+  ...
+# Subtest: two devices same mission merge to one reward
+ok 17 - two devices same mission merge to one reward
+  ---
+  duration_ms: 0.180412
+  type: 'test'
+  ...
+# Subtest: two different offline missions both count
+ok 18 - two different offline missions both count
+  ---
+  duration_ms: 0.122935
+  type: 'test'
+  ...
+# Subtest: acknowledging same event twice remains idempotent
+ok 19 - acknowledging same event twice remains idempotent
+  ---
+  duration_ms: 0.246972
+  type: 'test'
+  ...
+# Subtest: server rejection rolls back optimistic XP without touching other rewards
+ok 20 - server rejection rolls back optimistic XP without touching other rewards
+  ---
+  duration_ms: 0.187873
+  type: 'test'
+  ...
+# Subtest: network failure does not remove pending event
+ok 21 - network failure does not remove pending event
+  ---
+  duration_ms: 0.11242
+  type: 'test'
+  ...
+# Subtest: old-cycle XP cannot inflate new prestige level but skill XP persists
+ok 22 - old-cycle XP cannot inflate new prestige level but skill XP persists
+  ---
+  duration_ms: 0.319752
+  type: 'test'
+  ...
+# Subtest: reject malformed XP payloads
+ok 23 - reject malformed XP payloads
+  ---
+  duration_ms: 0.533594
+  type: 'test'
+  ...
+# Subtest: event IDs enforce slot and week identity
+ok 24 - event IDs enforce slot and week identity
+  ---
+  duration_ms: 0.538502
+  type: 'test'
+  ...
+# Subtest: mutant: removing duplicate protection is caught
+ok 25 - mutant: removing duplicate protection is caught
+  ---
+  duration_ms: 0.301354
+  type: 'test'
+  ...
+# Subtest: server duplicate is confirmed, not removed from local XP
+ok 26 - server duplicate is confirmed, not removed from local XP
+  ---
+  duration_ms: 1.53988
+  type: 'test'
+  ...
+# Subtest: two concurrent devices submitting same mission converge to one award
+ok 27 - two concurrent devices submitting same mission converge to one award
+  ---
+  duration_ms: 0.606594
+  type: 'test'
+  ...
+# Subtest: two different offline missions survive server reconciliation
+ok 28 - two different offline missions survive server reconciliation
+  ---
+  duration_ms: 0.185029
+  type: 'test'
+  ...
+# Subtest: server rejection removes optimistic XP but leaves other rewards
+ok 29 - server rejection removes optimistic XP but leaves other rewards
+  ---
+  duration_ms: 0.273762
+  type: 'test'
+  ...
+# Subtest: transient RPC failure keeps event pending for retry
+ok 30 - transient RPC failure keeps event pending for retry
+  ---
+  duration_ms: 0.422206
+  type: 'test'
+  ...
+# Subtest: server snapshot overrides stale local award fields
+ok 31 - server snapshot overrides stale local award fields
+  ---
+  duration_ms: 0.165469
+  type: 'test'
+  ...
+# Subtest: fetch awards rejects malformed response and propagates database errors
+ok 32 - fetch awards rejects malformed response and propagates database errors
+  ---
+  duration_ms: 0.611662
+  type: 'test'
+  ...
+# Subtest: invalid event identity cannot be sent to RPC
+ok 33 - invalid event identity cannot be sent to RPC
+  ---
+  duration_ms: 0.208745
+  type: 'test'
+  ...
+# Subtest: RPC confirms offline XP without changing visible total
+ok 34 - RPC confirms offline XP without changing visible total
+  ---
+  duration_ms: 1.742186
+  type: 'test'
+  ...
+# Subtest: duplicate confirms an already-earned award without removing XP
+ok 35 - duplicate confirms an already-earned award without removing XP
+  ---
+  duration_ms: 0.354104
+  type: 'test'
+  ...
+# Subtest: network errors retain pending events for retry
+ok 36 - network errors retain pending events for retry
+  ---
+  duration_ms: 0.407234
+  type: 'test'
+  ...
+# Subtest: server rejection rolls back only rejected XP
+ok 37 - server rejection rolls back only rejected XP
+  ---
+  duration_ms: 0.307584
+  type: 'test'
+  ...
+# Subtest: malformed server result cannot acknowledge event
+ok 38 - malformed server result cannot acknowledge event
+  ---
+  duration_ms: 0.386042
+  type: 'test'
+  ...
+# Subtest: retry after uncertain acknowledgement resolves as duplicate
+ok 39 - retry after uncertain acknowledgement resolves as duplicate
+  ---
+  duration_ms: 0.366362
+  type: 'test'
+  ...
+# Subtest: invalid identity cannot reach RPC
+ok 40 - invalid identity cannot reach RPC
+  ---
+  duration_ms: 0.329326
+  type: 'test'
+  ...
+# Subtest: independent devices can race; second gets duplicate (simulated serialized server)
+ok 41 - independent devices can race; second gets duplicate (simulated serialized server)
+  ---
+  duration_ms: 0.463398
+  type: 'test'
+  ...
+# Subtest: newer confirmation wins even when uploaded earlier
+ok 42 - newer confirmation wins even when uploaded earlier
+  ---
+  duration_ms: 0.954879
+  type: 'test'
+  ...
+# Subtest: late offline upload cannot overwrite newer confirmation
+ok 43 - late offline upload cannot overwrite newer confirmation
+  ---
+  duration_ms: 1.695104
+  type: 'test'
+  ...
+# Subtest: duplicate retry is idempotent
+ok 44 - duplicate retry is idempotent
+  ---
+  duration_ms: 0.150998
+  type: 'test'
+  ...
+# Subtest: first customization applies
+ok 45 - first customization applies
+  ---
+  duration_ms: 0.083406
+  type: 'test'
+  ...
+# Subtest: ties have deterministic operation ID ordering
+ok 46 - ties have deterministic operation ID ordering
+  ---
+  duration_ms: 8.432316
+  type: 'test'
+  ...
+# Subtest: invalid timestamps rejected
+ok 47 - invalid timestamps rejected
+  ---
+  duration_ms: 0.295886
+  type: 'test'
+  ...
+# Subtest: missing job metadata rejected
+ok 48 - missing job metadata rejected
+  ---
+  duration_ms: 0.374204
+  type: 'test'
+  ...
+# Subtest: network failure never calls commit
+ok 49 - network failure never calls commit
+  ---
+  duration_ms: 0.445641
+  type: 'test'
+  ...
+# Subtest: superseded upload is reported and not applied
+ok 50 - superseded upload is reported and not applied
+  ---
+  duration_ms: 0.331079
+  type: 'test'
+  ...
+# Subtest: landscape resize preserves aspect ratio
+ok 51 - landscape resize preserves aspect ratio
+  ---
+  duration_ms: 2.125283
+  type: 'test'
+  ...
+# Subtest: portrait resize preserves aspect ratio
+ok 52 - portrait resize preserves aspect ratio
+  ---
+  duration_ms: 0.219601
+  type: 'test'
+  ...
+# Subtest: small artwork is not enlarged
+ok 53 - small artwork is not enlarged
+  ---
+  duration_ms: 0.368185
+  type: 'test'
+  ...
+# Subtest: very thin image remains valid
+ok 54 - very thin image remains valid
+  ---
+  duration_ms: 0.308515
+  type: 'test'
+  ...
+# Subtest: zero dimension rejected
+ok 55 - zero dimension rejected
+  ---
+  duration_ms: 0.260693
+  type: 'test'
+  ...
+# Subtest: oversized decompression rejected
+ok 56 - oversized decompression rejected
+  ---
+  duration_ms: 0.238709
+  type: 'test'
+  ...
+# Subtest: transparent art retains PNG
+ok 57 - transparent art retains PNG
+  ---
+  duration_ms: 0.120031
+  type: 'test'
+  ...
+# Subtest: opaque art uses efficient JPEG
+ok 58 - opaque art uses efficient JPEG
+  ---
+  duration_ms: 0.073781
+  type: 'test'
+  ...
+# Subtest: unsupported file rejected
+ok 59 - unsupported file rejected
+  ---
+  duration_ms: 0.327563
+  type: 'test'
+  ...
+# Subtest: larger conversion should not replace unscaled source
+ok 60 - larger conversion should not replace unscaled source
+  ---
+  duration_ms: 0.368174
+  type: 'test'
+  ...
+# Subtest: smaller conversion selected
+ok 61 - smaller conversion selected
+  ---
+  duration_ms: 0.149675
+  type: 'test'
+  ...
+# Subtest: server rejection is not resurrected by in-flight local snapshot
+ok 62 - server rejection is not resurrected by in-flight local snapshot
+  ---
+  duration_ms: 1.693872
+  type: 'test'
+  ...
+# Subtest: confirmed RPC missing from stale server snapshot remains pending
+ok 63 - confirmed RPC missing from stale server snapshot remains pending
+  ---
+  duration_ms: 1.770538
+  type: 'test'
+  ...
+# Subtest: authoritative server award replaces forged local XP
+ok 64 - authoritative server award replaces forged local XP
+  ---
+  duration_ms: 0.170407
+  type: 'test'
+  ...
+# Subtest: new completion made during request survives merge
+ok 65 - new completion made during request survives merge
+  ---
+  duration_ms: 0.402747
+  type: 'test'
+  ...
+# Subtest: prestige cycles with same weekly slot are distinct
+ok 66 - prestige cycles with same weekly slot are distinct
+  ---
+  duration_ms: 0.24571
+  type: 'test'
+  ...
+# Subtest: rejected event stays rejected on later sync without award
+ok 67 - rejected event stays rejected on later sync without award
+  ---
+  duration_ms: 0.131738
+  type: 'test'
+  ...
+# Subtest: authoritative award overrides prior rejection
+ok 68 - authoritative award overrides prior rejection
+  ---
+  duration_ms: 0.185179
+  type: 'test'
+  ...
+# Subtest: duplicate entries collapse by cycle and completion identity
+ok 69 - duplicate entries collapse by cycle and completion identity
+  ---
+  duration_ms: 0.130817
+  type: 'test'
+  ...
+# Subtest: IndexedDB upgrades existing upload queue without discarding uploads
+ok 70 - IndexedDB upgrades existing upload queue without discarding uploads
+  ---
+  duration_ms: 2.026674
+  type: 'test'
+  ...
+# Subtest: deletion tombstone saved before queued uploads are removed
+ok 71 - deletion tombstone saved before queued uploads are removed
+  ---
+  duration_ms: 0.300893
+  type: 'test'
+  ...
+# Subtest: offline deleted proof cannot enqueue
+ok 72 - offline deleted proof cannot enqueue
+  ---
+  duration_ms: 0.155364
+  type: 'test'
+  ...
+# Subtest: upload checks tombstone before and after network call
+ok 73 - upload checks tombstone before and after network call
+  ---
+  duration_ms: 0.229666
+  type: 'test'
+  ...
+# Subtest: cloud deletion requires user and kind and slot
+ok 74 - cloud deletion requires user and kind and slot
+  ---
+  duration_ms: 0.166881
+  type: 'test'
+  ...
+# Subtest: database trigger rejects proof resurrection
+ok 75 - database trigger rejects proof resurrection
+  ---
+  duration_ms: 0.199981
+  type: 'test'
+  ...
+# Subtest: cleanup retries and acknowledges only after removal
+ok 76 - cleanup retries and acknowledges only after removal
+  ---
+  duration_ms: 0.257849
+  type: 'test'
+  ...
+# Subtest: badge data is not removed by proof cleanup SQL
+ok 77 - badge data is not removed by proof cleanup SQL
+  ---
+  duration_ms: 0.175564
+  type: 'test'
+  ...
+# Subtest: delete control starts hidden
+ok 78 - delete control starts hidden
+  ---
+  duration_ms: 1.790368
+  type: 'test'
+  ...
+# Subtest: delete is gated by confirmation
+ok 79 - delete is gated by confirmation
+  ---
+  duration_ms: 0.27183
+  type: 'test'
+  ...
+# Subtest: deletion clears proof only, preserving badge metadata
+ok 80 - deletion clears proof only, preserving badge metadata
+  ---
+  duration_ms: 0.271639
+  type: 'test'
+  ...
+# Subtest: deletion emits scoped queue cancellation
+ok 81 - deletion emits scoped queue cancellation
+  ---
+  duration_ms: 0.224659
+  type: 'test'
+  ...
+# Subtest: queue cancellation is owner and slot scoped
+ok 82 - queue cancellation is owner and slot scoped
+  ---
+  duration_ms: 0.180673
+  type: 'test'
+  ...
+# Subtest: dialog reset hides delete button
+ok 83 - dialog reset hides delete button
+  ---
+  duration_ms: 0.151599
+  type: 'test'
+  ...
+# Subtest: successful replacement switches pointer then deletes previous object
+ok 84 - successful replacement switches pointer then deletes previous object
+  ---
+  duration_ms: 1.747383
+  type: 'test'
+  ...
+# Subtest: offline upload preserves original and never deletes it
+ok 85 - offline upload preserves original and never deletes it
+  ---
+  duration_ms: 1.431878
+  type: 'test'
+  ...
+# Subtest: failed database commit preserves original and never deletes it
+ok 86 - failed database commit preserves original and never deletes it
+  ---
+  duration_ms: 0.183517
+  type: 'test'
+  ...
+# Subtest: failed deletion leaves new image active and queues cleanup
+ok 87 - failed deletion leaves new image active and queues cleanup
+  ---
+  duration_ms: 0.319702
+  type: 'test'
+  ...
+# Subtest: cleanup never deletes an image that is still referenced
+ok 88 - cleanup never deletes an image that is still referenced
+  ---
+  duration_ms: 0.175124
+  type: 'test'
+  ...
+# Subtest: missing owner or slot is rejected
+ok 89 - missing owner or slot is rejected
+  ---
+  duration_ms: 0.142344
+  type: 'test'
+  ...
+# Subtest: Sunday to Monday reset is at Lisbon midnight in winter
+ok 90 - Sunday to Monday reset is at Lisbon midnight in winter
+  ---
+  duration_ms: 16.055862
+  type: 'test'
+  ...
+# Subtest: summer Lisbon midnight is 23:00 UTC on Sunday
+ok 91 - summer Lisbon midnight is 23:00 UTC on Sunday
+  ---
+  duration_ms: 0.639123
+  type: 'test'
+  ...
+# Subtest: DST spring week remains local-Monday anchored
+ok 92 - DST spring week remains local-Monday anchored
+  ---
+  duration_ms: 0.375075
+  type: 'test'
+  ...
+# Subtest: DST autumn week remains local-Monday anchored
+ok 93 - DST autumn week remains local-Monday anchored
+  ---
+  duration_ms: 0.401185
+  type: 'test'
+  ...
+# Subtest: account zone overrides device zone
+ok 94 - account zone overrides device zone
+  ---
+  duration_ms: 0.505722
+  type: 'test'
+  ...
+# Subtest: invalid zone and timestamp are rejected
+ok 95 - invalid zone and timestamp are rejected
+  ---
+  duration_ms: 0.577229
+  type: 'test'
+  ...
+# Subtest: Sunday offline quest accepted after reconnect on Tuesday
+ok 96 - Sunday offline quest accepted after reconnect on Tuesday
+  ---
+  duration_ms: 0.818834
+  type: 'test'
+  ...
+# Subtest: Monday completion cannot be attributed to prior week
+ok 97 - Monday completion cannot be attributed to prior week
+  ---
+  duration_ms: 0.284509
+  type: 'test'
+  ...
+# Subtest: future clock anomaly is rejected
+ok 98 - future clock anomaly is rejected
+  ---
+  duration_ms: 0.27205
+  type: 'test'
+  ...
+# Subtest: same event ID merges once despite retries
+ok 99 - same event ID merges once despite retries
+  ---
+  duration_ms: 0.441455
+  type: 'test'
+  ...
+# Subtest: distinct event IDs merge, even across offline devices
+ok 100 - distinct event IDs merge, even across offline devices
+  ---
+  duration_ms: 0.968319
+  type: 'test'
+  ...
+# Subtest: malformed event is rejected rather than crashing
+ok 101 - malformed event is rejected rather than crashing
+  ---
+  duration_ms: 0.10568
+  type: 'test'
+  ...
+1..101
+# tests 101
+# suites 0
+# pass 101
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 352.197156

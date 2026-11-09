@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const html=(readFileSync(new URL('../index.html',import.meta.url),'utf8')+'\n'+readFileSync(new URL('../src/app.mjs',import.meta.url),'utf8'));
+const queue=readFileSync(new URL('./artwork-queue.js',import.meta.url),'utf8');
+test('delete control starts hidden',()=>assert.match(html,/id="deleteBadgeProof" hidden/));
+test('delete is gated by confirmation',()=>assert.match(html,/deleteBadgeProof'\)\.onclick=.*?if\(!confirm\(/s));
+test('deletion clears proof only, preserving badge metadata',()=>{assert.match(html,/delete record\.proof/);assert.doesNotMatch(html,/delete s\.atelierDone\[id\]/);});
+test('deletion emits scoped queue cancellation',()=>assert.match(html,/pah:artwork-proof-deleted/));
+test('queue cancellation is owner and slot scoped',()=>assert.match(queue,/x\.owner===activeOwner&&x\.kind===kind&&x\.slot===slot/));
+test('dialog reset hides delete button',()=>assert.match(html,/deleteBadgeProof'\)\.hidden=true/));

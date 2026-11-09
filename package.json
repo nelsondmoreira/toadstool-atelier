@@ -1,0 +1,16 @@
+{
+  "name": "toadstool-atelier",
+  "version": "0.3.7",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test frontend/cloud/*.test.mjs",
+    "check": "npm run test && npm run build"
+  },
+  "devDependencies": {
+    "vite": "^6.3.0"
+  }
+}

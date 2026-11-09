@@ -1,0 +1,96 @@
+TAP version 13
+# Subtest: offline completion gives immediate XP and remains pending
+ok 1 - offline completion gives immediate XP and remains pending
+  ---
+  duration_ms: 2.453856
+  type: 'test'
+  ...
+# Subtest: duplicate tap and network retry never grant double XP
+not ok 2 - duplicate tap and network retry never grant double XP
+  ---
+  duration_ms: 1.145565
+  type: 'test'
+  location: '/mnt/data/pah-work/pocket-art-helper/cloud/completion-ledger.test.mjs:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/pah-work/pocket-art-helper/cloud/completion-ledger.test.mjs:6:144)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: two devices same mission merge to one reward
+ok 3 - two devices same mission merge to one reward
+  ---
+  duration_ms: 0.140472
+  type: 'test'
+  ...
+# Subtest: two different offline missions both count
+ok 4 - two different offline missions both count
+  ---
+  duration_ms: 0.12606
+  type: 'test'
+  ...
+# Subtest: acknowledging same event twice remains idempotent
+ok 5 - acknowledging same event twice remains idempotent
+  ---
+  duration_ms: 0.17904
+  type: 'test'
+  ...
+# Subtest: server rejection rolls back optimistic XP without touching other rewards
+ok 6 - server rejection rolls back optimistic XP without touching other rewards
+  ---
+  duration_ms: 0.25195
+  type: 'test'
+  ...
+# Subtest: network failure does not remove pending event
+ok 7 - network failure does not remove pending event
+  ---
+  duration_ms: 0.118488
+  type: 'test'
+  ...
+# Subtest: old-cycle XP cannot inflate new prestige level but skill XP persists
+ok 8 - old-cycle XP cannot inflate new prestige level but skill XP persists
+  ---
+  duration_ms: 0.171528
+  type: 'test'
+  ...
+# Subtest: reject malformed XP payloads
+ok 9 - reject malformed XP payloads
+  ---
+  duration_ms: 0.629057
+  type: 'test'
+  ...
+# Subtest: event IDs enforce slot and week identity
+ok 10 - event IDs enforce slot and week identity
+  ---
+  duration_ms: 0.51796
+  type: 'test'
+  ...
+# Subtest: mutant: removing duplicate protection is caught
+ok 11 - mutant: removing duplicate protection is caught
+  ---
+  duration_ms: 0.428225
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 10
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 90.967386

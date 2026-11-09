@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const queue=readFileSync(new URL('./artwork-queue.js',import.meta.url),'utf8');
+const sql=readFileSync(new URL('../../backend/supabase/schema.sql',import.meta.url),'utf8');
+test('IndexedDB upgrades existing upload queue without discarding uploads',()=>{assert.match(queue,/indexedDB.open\(DB, 2\)/);assert.match(queue,/if \(!req.result.objectStoreNames.contains\(STORE\)\)/);});
+test('deletion tombstone saved before queued uploads are removed',()=>assert.ok(queue.indexOf('await saveDeletion({key:proofKey(activeOwner')<queue.indexOf('for(const item of pending) {await remove(item.id)')));
+test('offline deleted proof cannot enqueue',()=>assert.match(queue,/await isDeleted\(enqueueOwner,kind,slot\)/));
+test('upload checks tombstone before and after network call',()=>assert.equal((queue.match(/await isDeleted\(activeOwner,item.kind,item.slot\)/g)||[]).length,2));
+test('cloud deletion requires user and kind and slot',()=>assert.match(sql,/uid is null or p_kind not in/));
+test('database trigger rejects proof resurrection',()=>assert.match(sql,/create trigger prevent_deleted_proof_resurrection/));
+test('cleanup retries and acknowledges only after removal',()=>assert.ok(queue.indexOf("storage.from('artist-artwork').remove(paths)")<queue.indexOf("rpc('ack_proof_storage_cleanup'")));
+test('badge data is not removed by proof cleanup SQL',()=>assert.doesNotMatch(sql.slice(sql.indexOf('-- v1.2:')),/delete from public.artist_profiles/));

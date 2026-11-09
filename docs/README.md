@@ -1,0 +1,13 @@
+# Documentation index
+
+- [Development rules & guidelines](../CONTRIBUTING.md) — conventions, safety gates and review process
+- [Getting started](development/GETTING-STARTED.md) — run locally
+- [Testing](development/TESTING.md) — coverage and verification levels
+- [Current architecture](architecture/CURRENT-STATE.md) — honest state of the prototype
+- [Target structure](architecture/TARGET-STRUCTURE.md) — migration destination
+- [Stack decision record](decisions/0001-technology-stack.md) — rationale, overlap avoidance, deferred decisions
+- [Supabase operations](operations/SUPABASE.md) — backend setup and security gate
+- [Architecture notes](architecture/README.md) — existing domain documents
+- [Historical reports](history/) — previous changes and test output
+
+Architectural changes should add or update a numbered ADR under `decisions/` after owner approval.
