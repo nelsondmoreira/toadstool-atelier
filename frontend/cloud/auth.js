@@ -2,6 +2,7 @@ import {createGalleryCloudRestoration} from './supabase-artwork-restoration.mjs'
 import {browserArtworkVault} from './artwork-vault-session.mjs';
 import { setupCompletionBridge } from './completion-bridge.js';
 import { setupArtworkQueue } from './artwork-queue.js';
+async function initializeCloudAuth() {
 // Cloud authentication layer. The app deliberately keeps browser-local progress
 // until a separate, user-approved artwork migration and sync flow is built.
 const $ = id => document.getElementById(id);
@@ -118,3 +119,12 @@ if (config) {
     } catch (err) { message('Could not initialize cloud sign-in: ' + err.message, true); disableSignIn(true); }
   }
 }
+}
+void initializeCloudAuth().catch(err => {
+  const status = document.getElementById('cloudMessage');
+  if (status) status.textContent = 'Cloud sign-in initialization failed: ' + err.message;
+  for (const id of ['emailSignIn', 'googleSignIn']) {
+    const button = document.getElementById(id);
+    if (button) button.disabled = true;
+  }
+});
