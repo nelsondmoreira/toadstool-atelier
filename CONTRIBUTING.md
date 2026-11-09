@@ -64,7 +64,9 @@ See [ADR-0001](docs/decisions/0001-technology-stack.md) and [target structure](d
 
 ## 7. Git and review workflow
 
-- `main` is the stable branch. Work in short-lived branches named `feature/<topic>`, `fix/<topic>`, or `refactor/<topic>`.
+- `main` is the stable branch. Use GitHub Flow: create short-lived branches from `main`, open a pull request, run required CI checks, review, and merge only when checks pass. No permanent `develop` branch unless approved.
+- Branch names follow `type/short-kebab-case-description`. Approved types: `feat/` (new functionality), `fix/` (bug fixes), `refactor/` (behavior-preserving restructuring), `docs/` (documentation), `test/` (tests), and `chore/` (tooling and maintenance).
+- Example: `refactor/frontend-react-typescript`. Keep branches focused and delete them after merging.
 - Make focused commits with descriptive imperative messages (for example `feat: restore gallery artwork after sign-in`).
 - Avoid mixing a large structural refactor with unrelated features or visual redesign.
 - Review the diff, run checks and summarize behavior changes, tests, migrations and outstanding risks before merging.
