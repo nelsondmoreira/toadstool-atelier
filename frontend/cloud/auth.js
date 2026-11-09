@@ -12,7 +12,7 @@ const message = (text, error = false) => {
 const buttonIds = ['emailSignIn','googleSignIn'];
 function disableSignIn(disabled) { for (const id of buttonIds) $(id).disabled = disabled; }
 let config;
-try { config = await import('./config.js'); } catch {
+try { config = await import(/* @vite-ignore */ './config.js'); } catch {
   message('Cloud sign-in is not configured yet. See cloud/README.md for setup instructions.');
   disableSignIn(true);
 }
