@@ -11,8 +11,11 @@ const message = (text, error = false) => {
 };
 const buttonIds = ['emailSignIn','googleSignIn'];
 function disableSignIn(disabled) { for (const id of buttonIds) $(id).disabled = disabled; }
+// The optional local file is intentionally untracked. Keep its specifier dynamic:
+// a literal import is resolved by Rollup even with @vite-ignore in a build.
+const localConfigPath = './config.js';
 let config;
-try { config = await import(/* @vite-ignore */ './config.js'); } catch {
+try { config = await import(/* @vite-ignore */ localConfigPath); } catch {
   message('Cloud sign-in is not configured yet. See cloud/README.md for setup instructions.');
   disableSignIn(true);
 }
