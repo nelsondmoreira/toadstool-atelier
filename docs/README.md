@@ -6,6 +6,7 @@
 - [Current architecture](architecture/CURRENT-STATE.md) — honest state of the prototype
 - [Target structure](architecture/TARGET-STRUCTURE.md) — migration destination
 - [Stack decision record](decisions/0001-technology-stack.md) — rationale, overlap avoidance, deferred decisions
+- [React island boundaries](decisions/0002-react-island-boundaries.md) — approved visual ownership, CSS rules and manual integration steps
 - [Supabase operations](operations/SUPABASE.md) — backend setup and security gate
 - [Architecture notes](architecture/README.md) — existing domain documents
 - [Historical reports](history/) — previous changes and test output

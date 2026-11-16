@@ -1,10 +1,31 @@
+// Static source inspection only; this does not execute browser or database behavior.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-const html=(readFileSync(new URL('../index.html',import.meta.url),'utf8')+'\n'+readFileSync(new URL('../src/app.mjs',import.meta.url),'utf8'));
-test('badge detail includes an initially hidden proof container',()=>{assert.match(html, /id="badgeDetailProof" class="badge-proof" hidden/);});
-test('badge reveal button starts collapsed',()=>{assert.match(html, /id="viewBadgeDrawing"[^>]*aria-expanded="false"/);});
-test('opening a badge resets proof state instead of inserting its image',()=>{assert.match(html, /proofBox\.replaceChildren\(\);proofBox\.hidden=true/);assert.match(html,/reveal\.dataset\.proof=proof/);});
-test('proof image is only created by reveal click',()=>{assert.match(html,/viewBadgeDrawing'\)\.onclick=.*?document\.createElement\('img'\)/s);});
-test('closing the dialog removes the old proof image and reference',()=>{assert.match(html,/addEventListener\('close'.*?delete \$\('viewBadgeDrawing'\)\.dataset\.proof/s);});
-test('badges without a proof disable the reveal control',()=>{assert.match(html,/reveal\.disabled=true;delete reveal\.dataset\.proof/);});
+import { readFileSync } from 'node:fs';
+
+const html = (readFileSync(new URL('../index.html', import.meta.url), 'utf8') + '\n' + readFileSync(new URL('../src/app.mjs', import.meta.url), 'utf8'));
+
+test('badge detail includes an initially hidden proof container', () => {
+  assert.match(html, /id="badgeDetailProof"\s+class="badge-proof"\s+hidden/);
+});
+
+test('badge reveal button starts collapsed', () => {
+  assert.match(html, /id="viewBadgeDrawing"[^>]*aria-expanded="false"/);
+});
+
+test('opening a badge resets proof state instead of inserting its image', () => {
+  assert.match(html, /proofBox\.replaceChildren\(\);\s*proofBox\.hidden\s*=\s*true/);
+  assert.match(html, /reveal\.dataset\.proof\s*=\s*proof/);
+});
+
+test('proof image is only created by reveal click', () => {
+  assert.match(html, /viewBadgeDrawing'\)\.onclick\s*=.*?document\.createElement\('img'\)/s);
+});
+
+test('closing the dialog removes the old proof image and reference', () => {
+  assert.match(html, /addEventListener\('close'.*?delete \$\('viewBadgeDrawing'\)\.dataset\.proof/s);
+});
+
+test('badges without a proof disable the reveal control', () => {
+  assert.match(html, /reveal\.disabled\s*=\s*true;\s*delete reveal\.dataset\.proof/);
+});
