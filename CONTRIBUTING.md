@@ -30,7 +30,8 @@ See [ADR-0001](docs/decisions/0001-technology-stack.md) and [target structure](d
 - `backend/supabase/`: database migrations, policies, storage configuration and Edge Functions.
 - `docs/`: architecture, development, decisions, operations and historical reports.
 - Keep tests near the code they exercise (`*.test.ts` / `*.test.tsx`); put cross-feature browser scenarios in `tests/e2e/` when Playwright is introduced.
-- Use **PascalCase** for React components and component filenames; **camelCase** for functions, variables and hooks (`useGallery`); **kebab-case** for feature directories; **UPPER_SNAKE_CASE** for module-level constants where appropriate.
+- Use **PascalCase** for project-defined file basenames, including non-component modules (for example `MountWeeklyProgress.tsx`); use **camelCase** for functions, methods, variables and hooks (for example `mountWeeklyProgress` and `useGallery`). React component identifiers remain **PascalCase** for JSX. Use **kebab-case** for feature directories and **UPPER_SNAKE_CASE** for module-level constants where appropriate.
+- Preserve tool-defined filenames such as `package.json`, `tsconfig.json`, `index.html` and `AGENTS.md`, and conventional test suffixes such as `.test.mjs` (`AccountScope.test.mjs`). Apply the convention to new files; migrate legacy filenames deliberately instead of performing unrelated bulk renames. Import paths must match the exact filename casing recorded by Git, including on case-insensitive development systems.
 - One clear exported responsibility per module; avoid giant components, circular imports and cross-feature imports into internal implementation details. Extract shared contracts only when actually shared.
 
 ## 4. TypeScript, UI and styling

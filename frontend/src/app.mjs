@@ -3,7 +3,7 @@ import { eventId, recordCompletion, totals, pendingEvents } from "../cloud/compl
 import { stateKey, readScopedState, writeScopedState } from '../cloud/account-scope.mjs';
 import { createLegacyGalleryMigration } from '../cloud/gallery-legacy-migration.mjs';
 import { createLegacyProofMigration } from '../cloud/legacy-proof-migration.mjs';
-import { mountWeeklyProgress } from "./features/missions/mountWeeklyProgress.tsx";
+import { mountWeeklyProgress } from "./features/missions/MountWeeklyProgress.tsx";
 const weeklyProgressContainer = document.getElementById("weekly-progress-root");
 if (!weeklyProgressContainer) {
   throw new Error("Weekly progress container was not found.");
