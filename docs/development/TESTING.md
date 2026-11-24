@@ -85,8 +85,10 @@ CDN removal or successful hosting. See [Pages operations](../operations/github-p
 for the separate first-publication procedure. The assistant has checked syntax and
 offline CLI help, but has not executed these suites or deployed the site.
 The user subsequently reported passing `npm run check` and
-`npm run test:browser` for the Pages changes. Live Actions/Pages verification
-remains pending; these are user-reported local results.
+`npm run test:browser` for the Pages changes. The user also reported a successful
+first checked one-shot Pages publication after correcting the GitHub CLI active
+account. These are user-reported results; fast publication, pause, unpublication
+and the complete offline UI cycle are not established by this first publication.
 
 ### Playwright setup
 

@@ -1,7 +1,9 @@
 # GitHub Pages operations
 
-Status: local implementation present; the user reported passing `npm run check`
-and `npm run test:browser`. First live publication remains unverified.
+Status: the user reported passing `npm run check`, `npm run test:browser` and
+the first checked one-shot publication (`on --once`). The assistant has not
+independently verified the public site. Live fast/pause/off behavior remains
+to be verified separately.
 Remote deployment requires committing and pushing
 the workflow/scripts to `main`. No publication has been performed by the assistant.
 
@@ -20,6 +22,45 @@ The authenticated user needs repository administration and token permissions for
 Pages/administration, Actions and repository variables. Insufficient token scopes
 must be corrected by the user; do not paste tokens into chat or commit them.
 The scripts target this repository explicitly, regardless of the current branch.
+
+### Troubleshooting HTTP 403 on deployment variables
+
+`status` reads the `PAGES_DEPLOY_CONTROL` repository variable. Authentication
+alone is insufficient: a token may access public repository metadata but lack
+permission to read repository variables. A failed `status` command performs no
+remote writes; the CLI's generic partial-state warning does not imply mutations.
+
+Inspect authentication locally with `gh auth status --hostname github.com`.
+Do not share token values. For stored browser/OAuth credentials, the required
+classic scope for repository-variable access can be refreshed with:
+
+```powershell
+gh auth refresh --hostname github.com --scopes repo
+```
+
+For a fine-grained personal access token, select this repository and configure
+repository permissions explicitly: Variables, Actions, Pages and Administration
+read/write, plus Contents read. Metadata read is implicit. `status` only needs
+the read permissions, but the full command set needs the write permissions.
+Refreshing OAuth scopes does not edit a fine-grained token's permissions.
+
+Also verify the active account: sufficient scopes do not grant access to a
+repository owned by a different account. During the first setup, the variable
+request returned HTTP 403 while another account was active, despite having the
+`repo` scope. Activating the owner account resolved the read-access failure:
+
+```powershell
+gh auth switch --hostname github.com --user nelsondmoreira
+```
+
+If that account is not stored, use
+`gh auth login --hostname github.com --web`, authorize the intended account,
+then check active-account status again. HTTPS matches this repository's remote.
+
+Tokens provided by `GH_TOKEN` or `GITHUB_TOKEN` can override stored credentials;
+correct the selected credential rather than assuming a browser login changed it.
+Retry `npm run deploy -- status` after correcting access. Do not run a mutating
+command to diagnose a failed read-only request.
 
 ## Target commands
 

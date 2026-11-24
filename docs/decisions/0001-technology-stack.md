@@ -20,7 +20,7 @@ Toadstool Atelier is a phone-first offline-capable art practice PWA with account
 - Keep stable prototype runnable until feature parity is established.
 
 ## Explicitly deferred choices
-Routing library, CSS styling system, IndexedDB library, service worker strategy, React state strategy, and whether to split shared types into a workspace package. These are architectural decisions requiring approval when needed. GitHub Pages is approved for initial demo frontend hosting; local workflow and CLI implementation are present, local checks were reported passing by the user, and live verification remains pending under [ADR-0005](0005-github-pages.md).
+Routing library, CSS styling system, IndexedDB library, service worker strategy, React state strategy, and whether to split shared types into a workspace package. These are architectural decisions requiring approval when needed. GitHub Pages is approved for initial demo frontend hosting; local checks and the first checked one-shot publication were reported successful by the user. Remaining live deployment modes require verification under [ADR-0005](0005-github-pages.md).
 
 ## Playwright adoption (approved 2026-11-24)
 

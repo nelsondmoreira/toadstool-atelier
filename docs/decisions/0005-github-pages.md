@@ -1,6 +1,6 @@
 # ADR-0005: GitHub Pages deployment controls
 
-Status: Accepted; local implementation present, local checks reported passing by the user; live Pages verification pending.
+Status: Accepted; local checks and the first checked one-shot publication reported successful by the user. Remaining live deployment modes require verification.
 
 ## Context
 
