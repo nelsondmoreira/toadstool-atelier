@@ -1,0 +1,41 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { planImage, chooseOutputType, shouldKeepOriginal } from '../../frontend/cloud/image-optimization.mjs';
+
+test('landscape resize preserves aspect ratio', () => assert.deepEqual(planImage(4096, 2048), {
+  width: 2048,
+  height: 1024,
+  resized: true
+}));
+
+test('portrait resize preserves aspect ratio', () => assert.deepEqual(planImage(1000, 4000), {
+  width: 512,
+  height: 2048,
+  resized: true
+}));
+
+test('small artwork is not enlarged', () => assert.deepEqual(planImage(400, 300), {
+  width: 400,
+  height: 300,
+  resized: false
+}));
+
+test('very thin image remains valid', () => assert.deepEqual(planImage(1, 10000), {
+  width: 1,
+  height: 2048,
+  resized: true
+}));
+
+test('zero dimension rejected', () => assert.throws(() => planImage(0, 100)));
+
+test('oversized decompression rejected', () => assert.throws(() => planImage(10000, 10000), /too large/));
+
+test('transparent art retains PNG', () => assert.equal(chooseOutputType('image/webp', true), 'image/png'));
+
+test('opaque art uses efficient JPEG', () => assert.equal(chooseOutputType('image/png', false), 'image/jpeg'));
+
+test('unsupported file rejected', () => assert.throws(() => chooseOutputType('image/svg+xml', false)));
+
+test('larger conversion should not replace unscaled source', () => assert.equal(shouldKeepOriginal(1000, 1100), true));
+
+test('smaller conversion selected', () => assert.equal(shouldKeepOriginal(1000, 700), false));

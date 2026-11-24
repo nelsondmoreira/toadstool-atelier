@@ -4,4 +4,4 @@ The `replace-design.mjs` module specifies the order of operations for a future S
 
 **Integration status:** This is a tested domain-level module, not yet wired to the HTML badge editor or a live Supabase adapter. The existing HTML editor continues to save custom designs locally. The database schema adds private design pointers and cleanup jobs. Production integration must use a transaction/RPC for the pointer update and cleanup-job insertion to avoid a crash between these two steps, enforce one active design per slot, and check owner authorization on the server. It must also persist staged files in IndexedDB and handle cross-device concurrent edits with compare-and-swap revisions. Never embed service-role credentials in the browser.
 
-Run: `node --test cloud/replace-design.test.mjs` from the project directory.
+Run: `node --test tests/unit/replace-design.test.mjs` from the project root.

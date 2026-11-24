@@ -8,4 +8,4 @@
 
 **Critical security:** the server, not the browser, must atomically compare versions and schedule cleanup. Enforce ownership, slot unlock authorization, asset ownership and private storage policies; never trust a client-supplied user ID alone. Prevent stale clients from directly updating the design pointer table. Do not delete proof drawings. A failed cleanup should be retried; check all live references before deleting. On account switch, clear in-memory image URLs and scope IndexedDB records to account ID.
 
-Run tests: `node --test cloud/*.test.mjs`.
+Run tests: `npm test`.

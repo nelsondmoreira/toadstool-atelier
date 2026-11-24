@@ -7,11 +7,13 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test frontend/cloud/*.test.mjs",
+    "test": "node scripts/run-node-tests.mjs",
     "check": "npm run test && npm run build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test:browser": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^7.0.2",

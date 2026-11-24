@@ -26,4 +26,4 @@ The SQL enables row-level security. Authentication alone does not provide cross-
 
 ## v0.8 image optimization
 
-See `IMAGE-OPTIMIZATION.md`. New queued artwork is optimized before being stored in IndexedDB. Run the policy, replacement and conflict tests with `node --test cloud/*.test.mjs` from the project root. The legacy HTML local image preview remains limited to 2MB and is not yet migrated to IndexedDB.
+See `IMAGE-OPTIMIZATION.md`. New queued artwork is optimized before being stored in IndexedDB. Run the policy, replacement and conflict tests with `npm test` from the project root. The legacy HTML local image preview remains limited to 2MB and is not yet migrated to IndexedDB.

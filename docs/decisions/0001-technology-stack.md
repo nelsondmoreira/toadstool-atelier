@@ -21,3 +21,23 @@ Toadstool Atelier is a phone-first offline-capable art practice PWA with account
 
 ## Explicitly deferred choices
 Routing library, CSS styling system, IndexedDB library, service worker strategy, deployment platform, React state strategy, and whether to split shared types into a workspace package. These are architectural decisions requiring approval when needed.
+
+## Playwright adoption (approved 2026-11-24)
+
+The owner approved introducing Playwright now for repeatable real-browser
+IndexedDB integration checks and, subsequently, the complete offline UI cycle.
+Install `@playwright/test` as a development dependency. Existing Node tests
+remain enabled; neither Vitest nor fake-indexeddb is introduced by this decision.
+
+Playwright runs a browser automatically from the terminal, headless by default.
+It is test tooling, not application runtime code. Initial setup uses Chromium;
+that does not establish Firefox, WebKit or physical mobile-device compatibility.
+Start a separate local Vite server for tests and use isolated browser contexts
+and temporary databases. Do not use a personal browser profile or production data.
+
+The dependency declaration and configuration are now present. Test code is
+centralized by level under `tests/` as approved on 2026-11-24. Browser tests
+use `.browser.test.mjs`; Node tests use `.test.mjs`. See `tests/README.md` and
+the testing guide for discovery, commands and verification limits. The user
+reported successful Node/build and browser checks after the reorganization;
+this does not establish complete UI E2E or mobile-device coverage.
