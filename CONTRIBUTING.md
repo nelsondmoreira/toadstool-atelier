@@ -66,6 +66,11 @@ See [ADR-0001](docs/decisions/0001-technology-stack.md) and [target structure](d
 
 ## 7. Git and review workflow
 
+Commits are always performed manually by the user. The assistant may review the
+diff and prepare commands, but must not infer permission to stage or commit from
+phrases such as "let's commit". Tests are also run by the user unless explicitly
+delegated. Branch operations and pushes require their own explicit authorization.
+
 See [Branching and commit conventions](docs/development/git-workflow.md) for
 message structure, staging, verification and the suggested current commit split.
 

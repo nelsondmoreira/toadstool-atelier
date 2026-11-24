@@ -1,8 +1,10 @@
 # Branching and commit conventions
 
 This guide consolidates the repository's GitHub Flow rules and provides a
-repeatable commit procedure. Commands are for the developer to execute; they
-do not authorize an assistant to create/switch branches, commit or push.
+repeatable commit procedure. Commits are always performed manually by the user.
+Requests such as "let's commit" ask the assistant to review and provide commands,
+not execute staging or commits. Commands below also do not authorize an assistant
+to create/switch branches or push.
 
 ## Branches
 
@@ -146,5 +148,5 @@ references consistent with the files introduced in each commit.
 - A merge-versus-rebase policy and squash/merge strategy are not selected by this
   guide. Agree them explicitly before rewriting or integrating branch history.
 - Do not force-push, rewrite published history or reset work without explicit
-  authorization. Do not create commits, branches or pushes on the user's behalf
-  unless that specific action is authorized.
+  authorization. Commits remain manual. Branch operations and pushes on the
+  user's behalf require their own explicit authorization.
