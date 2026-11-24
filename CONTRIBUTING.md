@@ -26,12 +26,12 @@ See [ADR-0001](docs/decisions/0001-technology-stack.md) and [target structure](d
 
 ## 3. Project layout and naming
 
-- `frontend/`: browser application, with `src/features/<feature>/` for feature-owned components, hooks, services, types and tests; `src/shared/` only for truly reusable code.
+- `frontend/`: browser application, with `src/features/<feature>/` for feature-owned components, hooks, services and types; `src/shared/` only for truly reusable code.
 - `backend/supabase/`: database migrations, policies, storage configuration and Edge Functions.
 - `docs/`: architecture, development, decisions, operations and historical reports.
-- Keep tests near the code they exercise (`*.test.ts` / `*.test.tsx`); put cross-feature browser scenarios in `tests/e2e/` when Playwright is introduced.
-- Use **PascalCase** for project-defined file basenames, including non-component modules (for example `MountWeeklyProgress.tsx`); use **camelCase** for functions, methods, variables and hooks (for example `mountWeeklyProgress` and `useGallery`). React component identifiers remain **PascalCase** for JSX. Use **kebab-case** for feature directories and **UPPER_SNAKE_CASE** for module-level constants where appropriate.
-- Preserve tool-defined filenames such as `package.json`, `tsconfig.json`, `index.html` and `AGENTS.md`, and conventional test suffixes such as `.test.mjs` (`AccountScope.test.mjs`). Apply the convention to new files; migrate legacy filenames deliberately instead of performing unrelated bulk renames. Import paths must match the exact filename casing recorded by Git, including on case-insensitive development systems.
+- Centralize tests in `tests/unit/`, `tests/integration/`, `tests/e2e/` and `tests/static/` according to what they verify. Use kebab-case basenames, `.test.mjs` for Node and `.browser.test.mjs` for Playwright; directory names identify the level without repeating `.integration` or `.e2e` in filenames. See [test organization](tests/README.md). Browser execution is an environment, not a test level. Keep test code out of production source directories.
+- Use **kebab-case** for new project-defined file basenames (for example `local-database.mjs` and `weekly-progress.tsx`); use **camelCase** for functions, methods, variables and hooks (for example `mountWeeklyProgress` and `useGallery`). React component identifiers remain **PascalCase** for JSX. Use **kebab-case** for feature directories and **UPPER_SNAKE_CASE** for module-level constants where appropriate.
+- Preserve tool-defined filenames such as `package.json`, `tsconfig.json`, `index.html` and `AGENTS.md`, and conventional test suffixes such as `.test.mjs` (`local-profile.test.mjs`). Apply the convention to new files; migrate legacy filenames deliberately instead of performing unrelated bulk renames. Import paths must match the exact filename casing recorded by Git, including on case-insensitive development systems.
 - One clear exported responsibility per module; avoid giant components, circular imports and cross-feature imports into internal implementation details. Extract shared contracts only when actually shared.
 
 ## 4. TypeScript, UI and styling
@@ -57,6 +57,7 @@ See [ADR-0001](docs/decisions/0001-technology-stack.md) and [target structure](d
 ## 6. Testing and definition of done
 
 - Every behavior change must include or update meaningful tests; add regression tests for fixed bugs.
+- Derive cases and expected results from feature requirements, including realistic boundary and failure scenarios. Assertions must detect broken behavior; do not copy implementation logic, mock away the responsibility under test, weaken assertions or skip failures merely to obtain a green suite. See the meaningful-coverage requirements in [Testing](docs/development/TESTING.md).
 - Test success, failure, retries, offline state, account switching and data integrity where relevant.
 - Integration tests must exercise real boundaries when feasible (HTTP/database/browser); distinguish stubs, local servers and live Supabase.
 - Run the available test suite and production build before claiming completion. Record exact commands and results, including limitations.
@@ -64,6 +65,9 @@ See [ADR-0001](docs/decisions/0001-technology-stack.md) and [target structure](d
 - A change is done when: behavior is implemented, existing behavior is preserved, relevant tests pass, documentation is updated, and known risks are disclosed.
 
 ## 7. Git and review workflow
+
+See [Branching and commit conventions](docs/development/git-workflow.md) for
+message structure, staging, verification and the suggested current commit split.
 
 - `main` is the stable branch. Use GitHub Flow: create short-lived branches from `main`, open a pull request, run required CI checks, review, and merge only when checks pass. No permanent `develop` branch unless approved.
 - Branch names follow `type/short-kebab-case-description`. Approved types: `feat/` (new functionality), `fix/` (bug fixes), `refactor/` (behavior-preserving restructuring), `docs/` (documentation), `test/` (tests), and `chore/` (tooling and maintenance).
