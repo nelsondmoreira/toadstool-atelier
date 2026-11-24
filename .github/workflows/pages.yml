@@ -1,0 +1,112 @@
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Deployment verification mode
+        type: choice
+        options: [checked, fast]
+        default: checked
+        required: true
+      request_id:
+        description: Request identifier created by the deploy command
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      publish: ${{ steps.control.outputs.publish }}
+      mode: ${{ steps.control.outputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Evaluate deployment control (off by default)
+        id: control
+        env:
+          PAGES_CONTROL: ${{ vars.PAGES_DEPLOY_CONTROL }}
+          REQUEST_ID: ${{ inputs.request_id }}
+          REQUEST_MODE: ${{ inputs.mode }}
+        run: |
+          node --input-type=module <<'JS'
+          import { appendFileSync } from 'node:fs';
+          import { decideDeployment } from './scripts/deployment-control.mjs';
+          const decision = decideDeployment({
+            event: process.env.GITHUB_EVENT_NAME,
+            ref: process.env.GITHUB_REF,
+            repository: process.env.GITHUB_REPOSITORY,
+            control: process.env.PAGES_CONTROL,
+            requestId: process.env.REQUEST_ID,
+            mode: process.env.REQUEST_MODE,
+          });
+          appendFileSync(process.env.GITHUB_OUTPUT,
+            `publish=${decision.publish}\nmode=${decision.mode}\n`);
+          JS
+
+  publish:
+    needs: plan
+    if: needs.plan.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: pages-publication
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run Node tests
+        if: needs.plan.outputs.mode == 'checked'
+        run: npm test
+      - name: Install test browser
+        if: needs.plan.outputs.mode == 'checked'
+        run: npx playwright install --with-deps chromium
+      - name: Run browser tests
+        if: needs.plan.outputs.mode == 'checked'
+        run: npm run test:browser
+      - name: Build Pages artifact
+        env:
+          GITHUB_PAGES: 'true'
+        run: npm run build
+      - name: Check Pages configuration
+        uses: actions/configure-pages@v5
+        with:
+          enablement: false
+      - name: Upload the verified build
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Reject a superseded main revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          head=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            echo "Remote main changed during this build; refusing to publish stale code."
+            exit 1
+          fi
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v5

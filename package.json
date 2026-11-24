@@ -10,7 +10,8 @@
     "test": "node scripts/run-node-tests.mjs",
     "check": "npm run test && npm run build",
     "typecheck": "tsc",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "deploy": "node scripts/deploy.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",

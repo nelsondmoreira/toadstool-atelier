@@ -71,6 +71,23 @@ Some legacy UI wiring tests inspect HTML and JavaScript source rather than execu
 
 ## Local verification commands
 
+### Deployment controls
+
+The Pages setup adds Node unit tests in `tests/unit/deployment-control.test.mjs`
+and `tests/unit/github-pages-api.test.mjs`, plus explicit source inspection in
+`tests/static/pages-workflow.test.mjs`. They are discovered by `npm test`.
+
+They cover input validation, safe defaults, checked/fast/manual authorization,
+one-shot automatic pause, activation sequencing, cancellation/pagination/timeouts,
+unpublication confirmation and GitHub CLI/API errors. Collaborators are simulated;
+passing these tests does not prove live GitHub permissions, actual Actions behavior,
+CDN removal or successful hosting. See [Pages operations](../operations/github-pages.md)
+for the separate first-publication procedure. The assistant has checked syntax and
+offline CLI help, but has not executed these suites or deployed the site.
+The user subsequently reported passing `npm run check` and
+`npm run test:browser` for the Pages changes. Live Actions/Pages verification
+remains pending; these are user-reported local results.
+
 ### Playwright setup
 
 From the repository root, install the test runner and its initial browser:

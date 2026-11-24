@@ -11,6 +11,8 @@
 - [Offline customization synchronization](decisions/0003-OfflineCustomizationSync.md) — version ordering, conflict preservation and recovery limits
 - [Local application storage](decisions/0004-local-storage.md) — approved IndexedDB stores, references, atomicity and migration constraints
 - [Supabase operations](operations/SUPABASE.md) — backend setup and security gate
+- [GitHub Pages operations](operations/github-pages.md) — approved deployment controls and guided setup status
+- [GitHub Pages decision](decisions/0005-github-pages.md) — hosting, deployment modes and publication constraints
 - [Architecture notes](architecture/README.md) — existing domain documents
 - [Historical reports](history/) — previous changes and test output
 

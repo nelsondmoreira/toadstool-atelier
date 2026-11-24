@@ -23,6 +23,7 @@ Known issues: DOM-heavy UI, incomplete separation of presentation and domain sta
 | Playwright | Real-browser storage integration and offline UI verification from the terminal. | Dependency and configuration present; the user reported passing browser checks after test reorganization. Complete offline UI coverage remains pending. |
 | Supabase | Optional future authentication, cloud storage and synchronization. | Source exists; deployment not verified; outside the initial local cycle. |
 | Vitest | Future frontend testing direction. | Deferred; not introduced with Playwright. |
+| GitHub Actions and Pages | Demo frontend publication, optional fast mode, pause/unpublish controls. | Local workflow and CLI implemented; local checks reported passing by the user, live publication unverified (ADR-0005). |
 
 Playwright browser automation is not proof of physical mobile-device behavior,
 deployed backend correctness or application offline readiness by itself.
